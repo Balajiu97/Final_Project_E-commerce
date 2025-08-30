@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-APP_NAME="E-Commerce-App"
+APP_NAME="ecommerce-app"
 TAG=${1:-latest}
 
 echo "🚀 Building Docker image..."

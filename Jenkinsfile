@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()   // enables GitHub webhook trigger (for single pipeline jobs)
-    }
-
     environment {
         DEV_REPO  = "balajiyuva/dev"
         PROD_REPO = "balajiyuva/prod"
@@ -13,9 +9,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
-                checkout scm
-            }
+            steps { checkout scm }
         }
 
         stage('Build & Push') {
@@ -28,12 +22,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
-                anyOf {
-                    branch 'dev'
-                    branch 'master'
-                }
-            }
+            when { anyOf { branch 'dev'; branch 'master' } }
             steps {
                 sh """
                   chmod +x ./deploy.sh
